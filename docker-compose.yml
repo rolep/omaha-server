@@ -1,17 +1,21 @@
-db:
-  extends:
-    file: docker-compose.common.yml
-    service: db
+---
+version: '2.4'
 
-redis:
-  extends:
-    file: docker-compose.common.yml
-    service: redis
+services:
+  db:
+    extends:
+      file: docker-compose.common.yml
+      service: db
 
-web:
-  extends:
-    file: docker-compose.common.yml
-    service: web
-  links:
-    - db
-    - redis
+  redis:
+    extends:
+      file: docker-compose.common.yml
+      service: redis
+
+  web:
+    extends:
+      file: docker-compose.common.yml
+      service: web
+    depends_on:
+      - db
+      - redis
